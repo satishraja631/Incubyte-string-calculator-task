@@ -9,8 +9,12 @@ export default function add(numbers:string):number{
         numbers=parts[1]
     }
 
-     return numbers
-           .split(delimitter)
+    const numsArray=numbers.split(delimitter).map(Number);
+    const negatives=numsArray.filter(num=>num<0);
+    if(negatives.length>0){
+        throw new Error(`Negatives not allowed : ${negatives.join(",")}`);
+    }
+    return numsArray
            .map(Number)
            .reduce((sum,num)=>sum+num,0);
 
